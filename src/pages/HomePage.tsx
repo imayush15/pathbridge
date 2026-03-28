@@ -32,7 +32,7 @@ export default function HomePage() {
   }, [state.apiKey]);
 
   if (currentPage === 'about') {
-    return <AboutPage onBack={() => setCurrentPage('home')} />;
+    return <AboutPage />;
   }
 
   return (
