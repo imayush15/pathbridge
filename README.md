@@ -1,73 +1,44 @@
-# React + TypeScript + Vite
+# PathBridge — AI Career Navigator
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+PathBridge turns messy academic data — grades, interests, marksheets, resumes — into structured, actionable career roadmaps in seconds. No sign-ups, no forms, complete privacy.
 
-Currently, two official plugins are available:
+## What It Does
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+Drop your unstructured background — paste text, upload an image of your marksheet — and PathBridge will:
 
-## React Compiler
+- **Build your profile** from whatever you give it, no matter how messy
+- **Generate 3 career pathways** — a Best Fit, an Ambitious Stretch, and a Safety Net
+- **Map education roadmaps** with real courses from Coursera, NPTEL, edX, and more
+- **Show salary expectations** for entry, mid-career, and senior levels based on your region
+- **Link to real jobs** on LinkedIn, Naukri, Indeed so you can see what's actually out there
+- **Compare any two paths** side-by-side with an AI-powered analysis grounded in live search data
+- **Answer follow-up questions** about any career path with search-backed responses
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Who It's For
 
-## Expanding the ESLint configuration
+- **Class 8–10** — Explore streams and early career direction
+- **Class 11–12** — Pick the right degree and college path
+- **Undergraduates** — Find your specialization and first job
+- **Working Professionals** — Switch careers with a solid, data-backed plan
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## How It Works
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+1. **Share your story** — Paste your grades, describe your interests, or upload a photo of your transcript. Be as messy as you want.
+2. **AI analyzes everything** — A multi-step reasoning chain extracts, infers, profiles, matches, ranks, and plans — all in under 30 seconds.
+3. **Get your roadmap** — 3 personalized career paths, each with step-by-step education plans, skills to build, timeline milestones, salary data, and job links.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## Input Methods
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+- **Text** — Type or paste your grades, interests, and career goals in any format
+- **Image** — Upload a photo of your marksheet, transcript, or resume — AI extracts everything automatically
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Privacy
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+- Your API key stays in your browser memory — never stored
+- Your data is processed and discarded — nothing is saved on any server
+- No accounts, no tracking, no analytics
+- Fully client-side application
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## License
+
+MIT
