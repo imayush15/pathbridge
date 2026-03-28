@@ -1,0 +1,26 @@
+steps:
+  # Build the container image
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '--build-arg', 'VITE_GEMINI_API_KEY=AIzaSyCPjyFyunQEAT9J_Cd1RS-wC_TpJOJ0gFY', '-t', 'gcr.io/$PROJECT_ID/pathbridge', '.']
+  # Push the container image to Container Registry
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'gcr.io/$PROJECT_ID/pathbridge']
+  # Deploy container image to Cloud Run
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: gcloud
+    args:
+      - 'run'
+      - 'deploy'
+      - 'pathbridge'
+      - '--image'
+      - 'gcr.io/$PROJECT_ID/pathbridge'
+      - '--region'
+      - 'us-central1'
+      - '--platform'
+      - 'managed'
+      - '--allow-unauthenticated'
+      - '--port'
+      - '80'
+images:
+  - 'gcr.io/$PROJECT_ID/pathbridge'
+timeout: '1200s'
