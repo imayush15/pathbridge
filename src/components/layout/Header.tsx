@@ -1,5 +1,4 @@
 import { Compass, Settings, Moon, Sun, CheckCircle2 } from 'lucide-react';
-import { Button } from '@/components/ui/button';
 import { Switch } from '@/components/ui/switch';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 import { useApp } from '@/context/AppContext';
@@ -16,47 +15,47 @@ export function Header({ onOpenApiKey }: { onOpenApiKey: () => void }) {
   }, [dark]);
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/80 backdrop-blur-xl supports-[backdrop-filter]:bg-background/60">
-      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
-        <a href="/" className="flex items-center gap-2.5 text-foreground no-underline">
-          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary text-white">
+    <header className="sticky top-0 z-50 w-full border-b border-border/30 bg-background/70 backdrop-blur-2xl supports-[backdrop-filter]:bg-background/50">
+      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+        <a href="/" className="flex items-center gap-3 text-foreground no-underline group">
+          <div className="relative flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-purple-600 text-white shadow-lg shadow-primary/25 transition-transform duration-200 group-hover:scale-105">
             <Compass className="h-5 w-5" />
           </div>
-          <span className="text-xl font-bold tracking-tight">PathBridge</span>
+          <div className="flex flex-col">
+            <span className="text-lg font-bold tracking-tight leading-tight">PathBridge</span>
+            <span className="text-[10px] font-medium text-muted-foreground leading-tight hidden sm:block">AI Career Navigator</span>
+          </div>
         </a>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2">
           <Tooltip>
-            <TooltipTrigger>
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={onOpenApiKey}
-                className="relative cursor-pointer"
-                aria-label="API Key Settings"
-              >
-                <Settings className="h-4 w-4" />
-                {state.apiKey && (
-                  <span className="absolute -right-0.5 -top-0.5 flex h-3 w-3">
-                    <CheckCircle2 className="h-3 w-3 text-green-500 fill-green-500" />
-                  </span>
-                )}
-              </Button>
+            <TooltipTrigger
+              onClick={onOpenApiKey}
+              className="relative cursor-pointer inline-flex items-center gap-2 rounded-md px-3 py-1.5 text-sm text-muted-foreground hover:text-foreground hover:bg-accent transition-colors"
+              aria-label="API Key Settings"
+            >
+              <Settings className="h-4 w-4" />
+              <span className="hidden sm:inline text-xs">API Key</span>
+              {state.apiKey && (
+                <CheckCircle2 className="h-3.5 w-3.5 text-emerald-500 fill-emerald-500" />
+              )}
             </TooltipTrigger>
             <TooltipContent>
-              {state.apiKey ? 'API key configured' : 'Set your Gemini API key'}
+              {state.apiKey ? 'API key configured' : 'Set your API key'}
             </TooltipContent>
           </Tooltip>
 
-          <div className="flex items-center gap-2">
-            <Sun className="h-4 w-4 text-muted-foreground" />
+          <div className="h-5 w-px bg-border/60 mx-1" />
+
+          <div className="flex items-center gap-2 rounded-full bg-muted/50 px-2 py-1.5">
+            <Sun className="h-3.5 w-3.5 text-muted-foreground" />
             <Switch
               checked={dark}
               onCheckedChange={setDark}
               aria-label="Toggle dark mode"
               className="cursor-pointer"
             />
-            <Moon className="h-4 w-4 text-muted-foreground" />
+            <Moon className="h-3.5 w-3.5 text-muted-foreground" />
           </div>
         </div>
       </div>

@@ -7,7 +7,7 @@ import { KeyRound, ExternalLink, Eye, EyeOff, CheckCircle2 } from 'lucide-react'
 
 export function ApiKeyDialog({ open, onOpenChange }: { open: boolean; onOpenChange: (open: boolean) => void }) {
   const { state, dispatch } = useApp();
-  const [key, setKey] = useState(state.apiKey || '');
+  const [key, setKey] = useState('');
   const [showKey, setShowKey] = useState(false);
   const [error, setError] = useState('');
 
@@ -17,7 +17,7 @@ export function ApiKeyDialog({ open, onOpenChange }: { open: boolean; onOpenChan
       return;
     }
     if (!key.startsWith('AIza')) {
-      setError('Invalid key format. Gemini API keys start with "AIza"');
+      setError('Invalid key format. API keys start with "AIza"');
       return;
     }
     dispatch({ type: 'SET_API_KEY', payload: key.trim() });
@@ -31,14 +31,15 @@ export function ApiKeyDialog({ open, onOpenChange }: { open: boolean; onOpenChan
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2">
             <KeyRound className="h-5 w-5 text-primary" />
-            Gemini API Key
+            API Keys
           </DialogTitle>
           <DialogDescription>
-            Your key stays in your browser. We never store or send it anywhere except Google&apos;s API.
+            Your key is kept in memory only for this session. Nothing is stored or sent to third parties.
           </DialogDescription>
         </DialogHeader>
 
-        <div className="space-y-4 pt-2">
+        <div className="space-y-5 pt-2">
+          {/* API Key */}
           <div className="space-y-2">
             <label htmlFor="api-key-input" className="text-sm font-medium">
               API Key
@@ -58,7 +59,7 @@ export function ApiKeyDialog({ open, onOpenChange }: { open: boolean; onOpenChan
                 variant="ghost"
                 size="icon"
                 className="absolute right-1 top-1/2 -translate-y-1/2 h-7 w-7 cursor-pointer"
-                onClick={() => setShowKey(!showKey)}
+                onClick={() => setShowKey(prev => !prev)}
                 aria-label={showKey ? 'Hide API key' : 'Show API key'}
               >
                 {showKey ? <EyeOff className="h-3.5 w-3.5" /> : <Eye className="h-3.5 w-3.5" />}

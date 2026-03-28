@@ -1,17 +1,26 @@
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { AppProvider } from '@/context/AppContext';
 import { TooltipProvider } from '@/components/ui/tooltip';
 import { Toaster } from '@/components/ui/sonner';
-import HomePage from '@/pages/HomePage';
+import LandingPage from '@/pages/LandingPage';
+import AppPage from '@/pages/AppPage';
+import AboutPage from '@/pages/AboutPage';
 import './index.css';
 
 function App() {
   return (
-    <AppProvider>
-      <TooltipProvider>
-        <HomePage />
-        <Toaster position="bottom-right" richColors />
-      </TooltipProvider>
-    </AppProvider>
+    <BrowserRouter>
+      <AppProvider>
+        <TooltipProvider>
+          <Routes>
+            <Route path="/" element={<LandingPage />} />
+            <Route path="/app" element={<AppPage />} />
+            <Route path="/about" element={<AboutPage />} />
+          </Routes>
+          <Toaster position="bottom-right" richColors />
+        </TooltipProvider>
+      </AppProvider>
+    </BrowserRouter>
   );
 }
 

@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
@@ -50,7 +51,7 @@
 
 /* ========== PATHBRIDGE EDTECH LIGHT THEME ========== */
 :root {
-    --background: #F5F3FF;
+    --background: #FAFAFE;
     --foreground: #1E1B4B;
     --card: #FFFFFF;
     --card-foreground: #1E1B4B;
@@ -58,15 +59,15 @@
     --popover-foreground: #1E1B4B;
     --primary: #6366F1;
     --primary-foreground: #FFFFFF;
-    --secondary: #EBEFF9;
+    --secondary: #EEF2FF;
     --secondary-foreground: #1E1B4B;
-    --muted: #EBEFF9;
+    --muted: #F1F5F9;
     --muted-foreground: #64748B;
-    --accent: #EBEFF9;
+    --accent: #EEF2FF;
     --accent-foreground: #1E1B4B;
     --destructive: #DC2626;
-    --border: #E0E7FF;
-    --input: #E0E7FF;
+    --border: #E2E8F0;
+    --input: #E2E8F0;
     --ring: #6366F1;
     --chart-1: #6366F1;
     --chart-2: #818CF8;
@@ -78,23 +79,23 @@
 
 /* ========== PATHBRIDGE EDTECH DARK THEME ========== */
 .dark {
-    --background: #0F0D1A;
-    --foreground: #E8E5F0;
-    --card: #1A1730;
-    --card-foreground: #E8E5F0;
-    --popover: #1A1730;
-    --popover-foreground: #E8E5F0;
+    --background: #09090F;
+    --foreground: #F1F0F7;
+    --card: #13131D;
+    --card-foreground: #F1F0F7;
+    --popover: #13131D;
+    --popover-foreground: #F1F0F7;
     --primary: #818CF8;
-    --primary-foreground: #0F0D1A;
-    --secondary: #2A2545;
-    --secondary-foreground: #E8E5F0;
-    --muted: #2A2545;
+    --primary-foreground: #09090F;
+    --secondary: #1E1B3A;
+    --secondary-foreground: #F1F0F7;
+    --muted: #1A1A2E;
     --muted-foreground: #94A3B8;
-    --accent: #2A2545;
-    --accent-foreground: #E8E5F0;
+    --accent: #1E1B3A;
+    --accent-foreground: #F1F0F7;
     --destructive: #F87171;
-    --border: #3D3660;
-    --input: #3D3660;
+    --border: #2A2A40;
+    --input: #2A2A40;
     --ring: #818CF8;
     --chart-1: #818CF8;
     --chart-2: #A5B4FC;
@@ -119,11 +120,94 @@
   }
 }
 
-/* Plus Jakarta Sans import */
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
-
 /* Smooth gradient text */
 .bg-clip-text {
   -webkit-background-clip: text;
   background-clip: text;
+}
+
+/* Hero mesh gradient background */
+.hero-gradient {
+  position: relative;
+  overflow: hidden;
+}
+.hero-gradient::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(99, 102, 241, 0.15), transparent),
+    radial-gradient(ellipse 60% 40% at 80% 50%, rgba(168, 85, 247, 0.1), transparent),
+    radial-gradient(ellipse 60% 40% at 20% 80%, rgba(236, 72, 153, 0.08), transparent);
+  pointer-events: none;
+  z-index: 0;
+}
+.dark .hero-gradient::before {
+  background:
+    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(99, 102, 241, 0.25), transparent),
+    radial-gradient(ellipse 60% 40% at 80% 50%, rgba(168, 85, 247, 0.15), transparent),
+    radial-gradient(ellipse 60% 40% at 20% 80%, rgba(236, 72, 153, 0.1), transparent);
+}
+
+/* Subtle dot grid pattern */
+.dot-grid {
+  background-image: radial-gradient(circle, rgba(99, 102, 241, 0.06) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+.dark .dot-grid {
+  background-image: radial-gradient(circle, rgba(129, 140, 248, 0.05) 1px, transparent 1px);
+}
+
+/* Float animation */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-12px); }
+}
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+.animate-float-delay {
+  animation: float 6s ease-in-out 2s infinite;
+}
+.animate-float-slow {
+  animation: float 8s ease-in-out 1s infinite;
+}
+
+/* Pulse glow for CTA */
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(99, 102, 241, 0.3); }
+  50% { box-shadow: 0 0 40px rgba(99, 102, 241, 0.5), 0 0 60px rgba(99, 102, 241, 0.2); }
+}
+.pulse-glow {
+  animation: pulse-glow 3s ease-in-out infinite;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(99, 102, 241, 0.2);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(99, 102, 241, 0.4);
+}
+
+/* Hide scrollbar but keep scroll functionality */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Selection color */
+::selection {
+  background: rgba(99, 102, 241, 0.2);
+  color: inherit;
 }

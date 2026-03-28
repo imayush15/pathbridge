@@ -74,6 +74,31 @@ export interface PathBridgeResponse {
   career_paths: CareerPath[];
 }
 
+export interface ConversationEntry {
+  question: string;
+  answer: string;
+  timestamp: number;
+  groundingChunks?: GroundingChunk[];
+}
+
+export interface GroundingChunk {
+  uri: string;
+  title: string;
+}
+
+export interface ComparisonResult {
+  summary: string;
+  dimensions: ComparisonDimension[];
+  groundingChunks?: GroundingChunk[];
+}
+
+export interface ComparisonDimension {
+  label: string;
+  path1Value: string;
+  path2Value: string;
+  winner: 1 | 2 | 'tie';
+}
+
 export type InputType = 'text' | 'image' | 'voice' | 'mixed';
 
 export interface AnalysisInput {

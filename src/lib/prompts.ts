@@ -150,6 +150,112 @@ IMPORTANT RULES:
   return prompt;
 }
 
+// ===== Follow-up Prompts =====
+
+export const FOLLOWUP_SYSTEM_PROMPT = `You are PathBridge, a career guidance AI assistant. You are having a follow-up conversation about a specific career path recommendation you previously made.
+
+STUDENT PROFILE:
+{{PROFILE}}
+
+SPECIFIC CAREER PATH BEING DISCUSSED:
+{{CAREER_PATH}}
+
+INSTRUCTIONS:
+- Answer the student's follow-up questions about this specific career path
+- Be specific, actionable, and encouraging
+- Reference the student's profile when relevant (their strengths, constraints, region, etc.)
+- If asked about costs, give region-specific estimates
+- If asked about risks, be honest but constructive
+- If asked about alternatives, suggest variations within this career direction
+- Keep responses concise but thorough (2-4 paragraphs)
+- Use bullet points for lists
+- Do NOT output JSON — respond in plain conversational text`;
+
+export function buildFollowUpSystemPrompt(
+  profile: import('./types').StudentProfile,
+  careerPath: import('./types').CareerPath
+): string {
+  const profileStr = JSON.stringify(profile, null, 2);
+  const pathStr = JSON.stringify(careerPath, null, 2);
+  return FOLLOWUP_SYSTEM_PROMPT
+    .replace('{{PROFILE}}', profileStr)
+    .replace('{{CAREER_PATH}}', pathStr);
+}
+
+// ===== Comparison Prompts =====
+
+export const COMPARISON_PROMPT = `Compare these two career paths for the given student profile. Analyze them across multiple dimensions.
+
+STUDENT PROFILE:
+{{PROFILE}}
+
+CAREER PATH 1: {{PATH1_TITLE}}
+{{PATH1}}
+
+CAREER PATH 2: {{PATH2_TITLE}}
+{{PATH2}}
+
+Provide your analysis as a JSON object with this exact structure (embedded in your response):
+{
+  "summary": "A 2-3 sentence overview comparing the two paths for this specific student",
+  "dimensions": [
+    {
+      "label": "Education Cost",
+      "path1Value": "brief value for path 1",
+      "path2Value": "brief value for path 2",
+      "winner": 1 or 2 or "tie"
+    },
+    {
+      "label": "Risk Level",
+      "path1Value": "...",
+      "path2Value": "...",
+      "winner": 1 or 2 or "tie"
+    },
+    {
+      "label": "Growth Potential",
+      "path1Value": "...",
+      "path2Value": "...",
+      "winner": 1 or 2 or "tie"
+    },
+    {
+      "label": "Timeline to First Job",
+      "path1Value": "...",
+      "path2Value": "...",
+      "winner": 1 or 2 or "tie"
+    }
+  ]
+}
+
+Use current market data from search results when available. Be specific and region-aware.`;
+
+export function buildComparisonPrompt(
+  profile: import('./types').StudentProfile,
+  path1: import('./types').CareerPath,
+  path2: import('./types').CareerPath
+): string {
+  return COMPARISON_PROMPT
+    .replace('{{PROFILE}}', JSON.stringify(profile, null, 2))
+    .replace('{{PATH1_TITLE}}', path1.title)
+    .replace('{{PATH1}}', JSON.stringify(path1, null, 2))
+    .replace('{{PATH2_TITLE}}', path2.title)
+    .replace('{{PATH2}}', JSON.stringify(path2, null, 2));
+}
+
+// ===== Image Generation Prompts =====
+
+export function buildAvatarPrompt(profile: import('./types').StudentProfile): string {
+  const interests = profile.interests.slice(0, 3).join(', ');
+  const strengths = profile.strengths.slice(0, 3).join(', ');
+  const level = profile.education_level.replace(/_/g, ' ');
+  return `A friendly, professional avatar illustration of a ${level} student. The student is interested in ${interests} and is strong in ${strengths}. Style: modern flat illustration, vibrant colors, clean lines, circular composition suitable for a profile picture. No text. White background.`;
+}
+
+export function buildRoadmapIllustrationPrompt(careerPath: import('./types').CareerPath): string {
+  const lastStep = careerPath.education_roadmap[careerPath.education_roadmap.length - 1];
+  const milestone = lastStep ? lastStep.action : careerPath.title;
+  return `A small, clean illustration representing the career goal: "${careerPath.title}". The image should depict "${milestone}" as the final achievement. Style: modern flat illustration, soft gradients, minimal detail, suitable as a small thumbnail. No text. Transparent or white background.`;
+}
+
 export const EXAMPLE_INPUTS = [
   {
     label: "10th grade student",

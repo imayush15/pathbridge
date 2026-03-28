@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -14,7 +15,7 @@ const techStack = [
   { icon: Zap, name: 'Vite', desc: 'Instant HMR, lightning-fast builds' },
   { icon: FileJson, name: 'Tailwind CSS v4', desc: 'Utility-first styling with custom design tokens' },
   { icon: Database, name: 'shadcn/ui', desc: 'Premium, accessible component library' },
-  { icon: Brain, name: 'Gemini 2.5 Flash', desc: 'Google\'s multimodal AI with JSON output mode' },
+  { icon: Brain, name: 'AI Engine', desc: 'Multimodal AI with structured output' },
   { icon: Sparkles, name: 'Framer Motion', desc: 'Spring-physics animations, scroll reveals' },
 ];
 
@@ -26,7 +27,7 @@ const howItWorks = [
   },
   {
     step: 2,
-    title: 'Gemini AI processes everything',
+    title: 'AI processes everything',
     description: 'Our 6-step reasoning chain (EXTRACT → INFER → PROFILE → MATCH → RANK → PLAN) builds a comprehensive understanding of you.',
   },
   {
@@ -38,19 +39,21 @@ const howItWorks = [
 
 const privacyPoints = [
   { icon: Lock, text: 'API key stored only in your browser\'s localStorage' },
-  { icon: Shield, text: 'Data sent only to Google\'s Gemini API — nowhere else' },
+  { icon: Shield, text: 'Data processed securely — never stored on our servers' },
   { icon: Database, text: 'No server, no database, no tracking' },
   { icon: Globe, text: 'Open source — inspect every line of code' },
 ];
 
-export default function AboutPage({ onBack }: { onBack: () => void }) {
+export default function AboutPage() {
+  const navigate = useNavigate();
+
   return (
     <div className="flex min-h-dvh flex-col bg-background">
       <Header onOpenApiKey={() => {}} />
 
       <main className="mx-auto w-full max-w-5xl flex-1 px-4 py-8 sm:px-6 sm:py-12">
         {/* Back button */}
-        <Button variant="ghost" className="mb-6 cursor-pointer" onClick={onBack}>
+        <Button variant="ghost" className="mb-6 cursor-pointer" onClick={() => navigate('/')}>
           <ArrowLeft className="mr-2 h-4 w-4" /> Back to Home
         </Button>
 
@@ -65,7 +68,7 @@ export default function AboutPage({ onBack }: { onBack: () => void }) {
           </div>
           <h1 className="text-3xl font-extrabold tracking-tight sm:text-4xl">About PathBridge</h1>
           <p className="mt-3 text-muted-foreground max-w-2xl mx-auto text-lg">
-            An AI-powered career pathway navigator that turns messy academic data into actionable career roadmaps. Built for hackathon, designed for impact.
+            An AI-powered career pathway navigator that turns messy academic data into actionable career roadmaps. Designed for impact.
           </p>
         </motion.div>
 
@@ -143,8 +146,8 @@ export default function AboutPage({ onBack }: { onBack: () => void }) {
         <section className="mb-8 text-center">
           <p className="text-muted-foreground text-sm">
             Built during{' '}
-            <Badge variant="secondary">Google Hackathon 2026</Badge>{' '}
-            using Gemini AI
+            the <Badge variant="secondary">PathBridge</Badge>{' '}
+            team
           </p>
         </section>
       </main>
