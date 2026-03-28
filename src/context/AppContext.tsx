@@ -37,7 +37,7 @@ type Action =
   | { type: 'SET_ROADMAP_IMAGE'; payload: { index: number; image: string } }
   | { type: 'SET_IMAGE_LOADING'; payload: { key: string; state: 'loading' | 'done' | 'error' } };
 
-const initialState: AppState = {
+export const initialState: AppState = {
   apiKey: null,
   cloudApiKey: null,
   isAnalyzing: false,
@@ -55,7 +55,9 @@ const initialState: AppState = {
   unlockedPaths: new Set<number>(),
 };
 
-function reducer(state: AppState, action: Action): AppState {
+export { type AppState, type Action };
+
+export function reducer(state: AppState, action: Action): AppState {
   switch (action.type) {
     case 'SET_API_KEY':
       return { ...state, apiKey: action.payload };

@@ -398,7 +398,7 @@ function sleep(ms: number): Promise<void> {
  * Walks char-by-char tracking whether we're inside a JSON string,
  * and escapes illegal control chars (0x00-0x1F except already-escaped ones).
  */
-function sanitizeJsonString(raw: string): string {
+export function sanitizeJsonString(raw: string): string {
   let result = '';
   let inString = false;
   let i = 0;
@@ -438,7 +438,7 @@ function sanitizeJsonString(raw: string): string {
 }
 
 /** Try to parse JSON, sanitizing control chars on failure */
-function safeJsonParse<T>(text: string): T {
+export function safeJsonParse<T>(text: string): T {
   try {
     return JSON.parse(text) as T;
   } catch {
